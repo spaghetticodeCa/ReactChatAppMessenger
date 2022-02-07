@@ -1,8 +1,11 @@
 img {
   border-radius: 50%;
   height: 45px;
+  width: 45px;
   margin-top: -20px;
   border: 2px solid black;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 p {
@@ -73,6 +76,7 @@ p {
   }
   img {
     height: 35px;
+    width: 35px;
     margin-top: -10px;
   }
 }
@@ -89,6 +93,7 @@ p {
   }
   img {
     height: 30px;
+    width: 30px;
     margin-top: -7px;
   }
 }

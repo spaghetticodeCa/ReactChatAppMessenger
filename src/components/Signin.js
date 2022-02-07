@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { provider } from "../firebase";
 import { signInWithRedirect } from "firebase/auth";
 import { auth } from "../firebase";
-
+import { UserContext } from "./UserContext";
 import Button from "@mui/material/Button";
 
 // import { Button } from "@material-ui/core";
 
 function Signin() {
+  const { value, setValue } = useContext(UserContext);
+
   function signInWithGoogle() {
     signInWithRedirect(auth, provider);
   }
+
   return (
     <div
       style={{
@@ -18,6 +21,7 @@ function Signin() {
         justifyContent: "center",
         height: "100vh",
         alignItems: "center",
+        flexDirection: "column",
       }}
     >
       <Button
@@ -30,6 +34,17 @@ function Signin() {
         onClick={signInWithGoogle}
       >
         Connectez-Vous Avec Votre Compte Google
+      </Button>
+      <Button
+        style={{
+          padding: "30px",
+          fontSize: "20px",
+          borderRadius: "0",
+          fontWeight: "600",
+        }}
+        onClick={() => setValue(true)}
+      >
+        Tester En Tant Qu'Invité
       </Button>
     </div>
   );

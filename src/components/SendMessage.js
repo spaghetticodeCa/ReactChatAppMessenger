@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { db, auth } from "../firebase";
 import { collection, serverTimestamp, doc, addDoc } from "firebase/firestore";
 import { Input, Button } from "@mui/material";
 import { FirebaseError } from "firebase/app";
+import { UserContext } from "./UserContext";
 
 function SendMessage({ scroll }) {
   const [msg, setMsg] = useState("");
+  const { value, setValue } = useContext(UserContext);
 
   async function sendMessage(e) {
     e.preventDefault();
-    const { uid, photoURL } = auth.currentUser;
+    console.log("value: ", value);
+    if (value == false) {
+      const { uid, photoURL } = auth.currentUser;
+    }
+
+    const uid = 1;
+
+    const photoURL =
+      "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png";
 
     // Add a new document with a generated id.
     const docRef = await addDoc(collection(db, "messages"), {
