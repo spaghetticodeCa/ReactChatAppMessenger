@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { auth } from "../firebase";
 import Button from "@mui/material/Button";
+import { UserContext } from "./UserContext";
 
 function Signout() {
+  const { value, setValue } = useContext(UserContext);
   return (
     <div
       style={{
@@ -24,7 +26,11 @@ function Signout() {
           fontWeight: "600",
         }}
         onClick={() => {
-          auth.signOut();
+          if (value) {
+            setValue(false);
+          } else {
+            auth.signOut();
+          }
         }}
       >
         Se Déconnecter

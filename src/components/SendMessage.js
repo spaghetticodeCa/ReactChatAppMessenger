@@ -12,32 +12,34 @@ function SendMessage({ scroll }) {
   async function sendMessage(e) {
     e.preventDefault();
     console.log("value: ", value);
-    if (value == false) {
+    if (value == true) {
+      const uid = "guest";
+
+      const photoURL =
+        "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png";
+      // Add a new document with a generated id.
+      const docRef = await addDoc(collection(db, "messages"), {
+        text: msg,
+        photoURL,
+        uid,
+        createdAt: serverTimestamp(),
+      });
+      console.log("Document written with ID: ", docRef.id);
+      setMsg("");
+      scroll.current.scrollIntoView({ behavior: "smooth" });
+    } else {
       const { uid, photoURL } = auth.currentUser;
+      // Add a new document with a generated id.
+      const docRef = await addDoc(collection(db, "messages"), {
+        text: msg,
+        photoURL,
+        uid,
+        createdAt: serverTimestamp(),
+      });
+      console.log("Document written with ID: ", docRef.id);
+      setMsg("");
+      scroll.current.scrollIntoView({ behavior: "smooth" });
     }
-
-    const uid = 1;
-
-    const photoURL =
-      "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png";
-
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "messages"), {
-      text: msg,
-      photoURL,
-      uid,
-      createdAt: serverTimestamp(),
-    });
-    console.log("Document written with ID: ", docRef.id);
-
-    // await db.collection("messages").add({
-    //   text: msg,
-    //   photoURL,
-    //   uid,
-    //   createdAt: serverTimestamp(),
-    // });
-    setMsg("");
-    scroll.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
